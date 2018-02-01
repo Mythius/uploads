@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>WEBSITE OF RANDOMNESS</title>
+        <link rel='shortcut icon' href='https://lh3.googleusercontent.com/-QgbGbE-CYFA/Wmd6_9yNX4I/AAAAAAAAC_k/1xeY8gHc-m4_R5ME9Q-PFtKydicynnJnQCL0BGAYYCw/h30/mythn.png'>
+        <style>
+            body{
+                background-color: black;
+            }
+            p{
+                color: white;
+            }
+            h2{
+                color: white;
+            }
+            #out{
+                color: #cc3810;
+                font-weight: bold;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h2>random()</h2>
+        <p>this is just a random website with random stuff.</p>
+        <button id='dL'>Delete Last</button><button id='dA'>Delete List</button>
+        <br>
+        <input id='in' type='search' onsearch='run()' placeholder='Input Here'>
+        <p id='out'></p>
+        <script>
+            function get(id){return document.getElementById(id);}
+            function html(id,html){return get(id).innerHTML = html;}
+            
+            var x = [];
+            var output = '';
+            
+            var a = get('dL');
+            a.addEventListener('click',deleteLast);
+            
+            var l = get('dA');
+            l.addEventListener('click',deleteList);
+            
+            function deleteLast(){
+                x.pop();
+                build();
+            }
+            
+            function deleteList(){
+                x = [];
+                build();
+            }
+            
+            function run(){
+                var txt = get('in').value;
+                x.push(txt);
+                get('in').value = '';
+                build();
+            }
+            function build(){
+                output = '<hr width="20%" align="left">';
+                var i;
+                for(i = 0;i < x.length;i++){
+                    output += x[i] + '<br>' + '<hr width="20%" align="left">';
+                }
+                html('out',output);
+            }
+            
+        </script>
+    </body>
+</html>
