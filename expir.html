@@ -1,0 +1,172 @@
+<html>
+    <head>
+        <title>Expirament</title>
+        <link rel='shortcut icon' href='https://lh3.googleusercontent.com/-QgbGbE-CYFA/Wmd6_9yNX4I/AAAAAAAAC_k/1xeY8gHc-m4_R5ME9Q-PFtKydicynnJnQCL0BGAYYCw/h30/mythn.png'>
+        <style>
+            body{
+                background-color: #AAA;
+            }
+            header{
+                background-color: #333;
+                border: 2px solid black;
+                text-align: center;
+                padding: 5;
+            }
+            #div{
+                border: 1px solid white;
+                background-color: black;
+            }
+            b{
+                font-size: 30px;
+                color: blue;
+            }
+            #cnvs{
+                background-color: #FFF;
+                border: 1px solid black;
+                box-shadow: 15px 15px 15px black;
+            }
+            #c{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <header id='h'>
+            <span id='spn'>
+            <button id='btn'>Try</button>
+            <span id='div'>
+                <input id='a' type='checkbox'>
+                <input id='b' type='checkbox'>
+                <input id='c' type='checkbox'>
+                <input id='d' type='checkbox'>
+                <input id='e' type='checkbox'>
+            </span>
+                <button id='hint'>Click for Hint</button>
+            </span>
+        </header>
+        <b id='out'>Guess the password: will return true if correct.</b>
+        <p id='outh'></p>
+        <div id='c'>
+        <canvas height='500' width=500 id=cnvs>your browser does not support the &lt;canvas&lt; Element </canvas>
+        </div>
+        <script>
+            
+            function get(id){return document.getElementById(id);}
+            function html(id,html){return get(id).innerHTML = html;}
+            
+            var p = [];
+            generate();
+            var h = false;
+
+            
+            var b = get('btn');
+            b.addEventListener('click',go);
+            var h = get('hint');
+            h.addEventListener('dblclick',showP);
+            h.addEventListener('click',update);
+            
+            function update(){ h = true; }
+            
+            function go(){
+                var a = get('a').checked;
+                var b = get('b').checked;
+                var c = get('c').checked;
+                var d = get('d').checked;
+                var e = get('e').checked;
+                var l = [a,b,c,d,e];
+                var x;
+                var t = 0;
+                var i;
+                for(i = 0;i < 5;i++){
+                    if(p[i] == l[i]){ t++; }
+                }
+                x = ((t == 5) ? 'PASSWORD CORRECT' : 'Password Inccorrect')
+                html('out',x);
+                if(h == true){
+                    showL(t);
+                    h = false;
+                } else { html('outh','');}
+            }
+
+            function generate(){
+                var i;
+                for(i = 0;i < 5;i++){
+                    var r = Math.round(Math.random());
+                    p.push(r);
+                }
+            }
+            
+            function showP(){
+                var i;
+                var o = '';
+                for(i = 0;i < p.length;i++){
+                    o += p[i];
+                }
+                alert(o);
+            }
+            
+            function showL(t){
+                html('outh','Amount Correct: ' + t);
+            }
+            
+            //Setup Canvas
+            var canvas = get('cnvs');
+            var ctx = canvas.getContext('2d');
+            ctx.lineWidth = 3;
+            ctx.translate(0.5,0.5);
+            ctx.translate(canvas.width / 2,canvas.height / 2);
+            ctx.strokeStyle = '#000';
+            ctx.fillStyle = '#00F';
+            var penDown = false;
+            //Setup Compete
+            var x = -250;
+            var y = -250;
+            
+            requestAnimationFrame(animation);
+            
+            function rect(x,y){
+                ctx.fillRect(x,y,50,-50);
+                ctx.strokeRect(x,y,1,1);
+                ctx.strokeRect(x + 50,y,1,1);
+                ctx.strokeRect(x + 50,y - 50,1,1);
+                ctx.strokeRect(x,y - 50,1,1);
+                ctx.stroke();
+            }
+            
+            function drawbez(){
+                ctx.moveTo(0,0);
+                ctx.bezierCurveTo(250,250,-250,250,-250,-250,250,-250);
+                ctx.stroke();
+            }
+            
+            function clear(){
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            canvas.addEventListener('mousemove',run);
+            
+           
+            
+            function animation() {
+                
+                x++;
+                
+                ctx.strokeRect(x,0,1,1);
+                ctx.stroke();
+                
+                requestAnimationFrame(animation);
+            }   
+            
+            
+            document.body.onkeyup = function(e){
+                if(e.keyCode == 32){
+                    alert('space pressed');
+                };
+            }
+            
+
+            
+
+        </script>
+    </body>
+</html>
