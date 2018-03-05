@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <title>GAME</title>
+        <style>
+            body{
+                text-align: center;
+                background-color: green;
+            }
+            #cnv{
+                border: 1px solid black;
+                height: 500;
+                width: 500;
+                background-color: white;
+                box-shadow: 15px 15px 15px black;
+                
+            }
+            #s1{
+                height: 50px;
+                width: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas height=500 width=500 id=cnv>&lt;canvas&gt; element not Supported.</canvas>
+        <br>
+        <script>
+            function get(id){return document.getElementById(id);}
+            function hide(id){get(id).style.visibility = 'hidden';}
+            function show(id){get(id).style.visibility = null;}
+            function html(id,html){get(id).innerHTML = html;}
+            function event(sr,ev,fn){sr.addEventListener(ev,fn);}
+            
+            
+            var canvas,
+                ctx;
+            prepCan();
+            
+            function prepCan(){
+                canvas = get('cnv');
+                ctx = canvas.getContext('2d');
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'black';
+                ctx.fillStyle = 'red';
+                ctx.translate(0.5,0.5);
+                
+            }
+            
+            function drawLine(ctx,x,y,x1,y1){
+                ctx.moveTo(x,y);
+                ctx.lineTo(x1,y1);
+                ctx.stroke();
+            }
+            
+            function random(min, max){return (Math.round((min + (Math.random() * (max - min)))));}
+            
+            function makeBlock(x,y,color){
+                ctx.fillStyle = color;
+                ctx.fillRect(x,y,50,50);
+                ctx.strokeRect(x,y,50,50);
+            }
+            
+            
+            
+            var x = 0,y = 450;
+            var va = 0,ha = 0;
+            var jumping = new Boolean(false);
+            var left = new Boolean(false);
+            var right = new Boolean(false);
+            event(document,'keydown',keydown);
+            var key = {up: 38, down: 40, left: 37, right: 39};
+            var speed = 2;
+            function keydown(ev){
+                switch(ev.keyCode){
+                    case key.left: left = true;break;
+                    case key.right: right = true;break;
+                }
+                if(ev.keyCode == key.up){
+                    if(!jumping){
+                        jumping = true;
+                        va = -20;  
+                    }
+                }
+                ev.preventDefault();
+            }
+            
+            var ex = 250,ey = 250;
+            function play(){
+                
+                if(right){
+                    ha += speed;
+                }
+                if(left){
+                    ha -= speed;
+                }
+                
+                
+                
+                x += ha;
+                y += va;
+                
+                va++;
+                
+                if(ex > x){ex--;}else if(ex < x){ex++;}
+                if(ey > y){ey--;}else if(ey < y){ey++;}
+                                  
+                ctx.clearRect(-1,-1,canvas.width+1,canvas.height+1);
+               
+                makeBlock(x,y,'blue');
+                
+                while(y > 450){
+                    y--;
+                }
+                
+                if(y > 449){
+                    jumping = false;
+                    va = 0;
+                }
+                
+                if(ha != 0){
+                    if(ha < 0){ha += 0.5;}else if(ha > 0){ha -= 0.5;}
+                }
+                
+                
+                requestAnimationFrame(play);
+            }
+            
+            requestAnimationFrame(play);
+           
+            
+
+        </script>
+    </body>
+</html>     
