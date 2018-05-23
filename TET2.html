@@ -136,6 +136,10 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
     }
     function run() {
       //showStats();
+      var a=document.createElement('link');
+      a.rel='shortcut icon';
+      a.href='https%3A%2F%2Flh3.googleusercontent.com%2F-q4ByXEO5dL0%2FWwTPTa64pOI%2FAAAAAAAAAPc%2FhKqPMNxkO_Iuw3fNAHd0d-3V4hTGIGavQCLcBGAs%2Fs0%2Fface.gif';
+      document.head.appendChild(a);
       addEvents(); 
       var last = now = timestamp();
       function frame() {
