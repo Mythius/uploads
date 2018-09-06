@@ -194,7 +194,7 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
         ev.preventDefault();
     }
     function play() { hide('start'); reset();          playing = true;  }
-    function lose() { show('start'); setVisualScore(); playing = false; }
+    function lose() { show('start'); setVisualScore(); updateDB(); playing = false; }
     function setVisualScore(n)      { vscore = n || score; invalidateScore(); }
     function setScore(n)            { score = n; setVisualScore(n);  }
     function addScore(n)            { score = score + n;   }
@@ -373,6 +373,35 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
       ctx.fillRect(x*dx, y*dy, dx, dy);
       ctx.strokeRect(x*dx, y*dy, dx, dy)
     }
+    
+    
+    
+    
+     function updateDB(){
+          
+          sql('INSERT INTO highScore ( score ) VALUES ( '+vscore+' )');
+      }
+      
+      function sql(code){
+          db.transaction(function(tx){
+              tx.executeSql(code);
+          });
+      }
+      
+      
+      
+      var db=openDatabase('derp','1.0','derp',10*1024*1024);
+      sql('CREATE TABLE highScore ( name varchar(20) , score int )');
+      
+      sql('INSERT INTO highScore ( score ) VALUES ( '+vscore+' )');
+    
+    
+    
+    
+    
+    
+    
+    
     run();
   </script>
 </body>
