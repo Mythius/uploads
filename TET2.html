@@ -99,7 +99,8 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
     var a = { size: 4, blocks: [0x324C, 0x8C31, 0x324C, 0x8C31], color: '#300' };
     var b = { size: 4, blocks: [0xEAE0, 0x0757, 0xF99F, 0x9009], color: '#32CD32'};
     var q = { size: 4, blocks: [0xA5A5, 0x5A5A, 0xA5A5, 0x5A5A], color: '#abc' };
-    var p = {size: 4, blocks: [0xAFAF, 0x0525, 0x0252, 0x2412], color: '#b666d2' };
+    var p = { size: 4, blocks: [0xAFAF, 0x0525, 0x0252, 0x2412], color: '#b666d2' };
+    var v = { size: 4, blocks: [0x9AC8, 0x842F, 0x1359, 0xF421], color: 'teal' };
     
 
     function eachblock(type, x, y, dir, fn) {
@@ -129,7 +130,7 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
     var pieces = [];
     function randomPiece() {
       if (pieces.length == 0)
-        pieces = [i,j,l,o,s,t,z,m,m,d,d,a,a,b,b,q,q,p,p];
+        pieces = [i,j,l,o,s,t,z,m,m,d,d,a,a,b,b,q,q,p,p,v,v];
   
       var type = pieces.splice(random(0, pieces.length-1), 1)[0];
       return { type: type, dir: DIR.UP, x: Math.round(random(0, nx - type.size)), y: 0 };
