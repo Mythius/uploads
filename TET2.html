@@ -102,7 +102,7 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
     var p = { size: 4, blocks: [0xAFAF, 0x0525, 0x0252, 0x2412], color: '#b666d2' };
     var v = { size: 4, blocks: [0x9AC8, 0x842F, 0x1359, 0xF421], color: 'teal' };
     var a = { size: 4, blocks: [0xFFDF, 0xFDFF, 0xFBFF, 0xFFBF], color: 'blue' };
-    
+    var u = { size: 4, blocks: [0x9669, 0xF888, 0x141C, 0x585F], color: '#02ed8b' };
 
     function eachblock(type, x, y, dir, fn) {
       var bit, result, row = 0, col = 0, blocks = type.blocks[dir];
@@ -131,7 +131,7 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
     var pieces = [];
     function randomPiece() {
       if (pieces.length == 0)
-        pieces = [i,j,l,o,s,t,z,m,m,d,d,a,a,b,b,q,q,p,p,v,v,a];
+        pieces = [i,j,l,o,s,t,z,m,m,d,d,a,a,b,b,q,q,p,p,v,v,a,u];
   
       var type = pieces.splice(random(0, pieces.length-1), 1)[0];
       return { type: type, dir: DIR.UP, x: Math.round(random(0, nx - type.size)), y: 0 };
