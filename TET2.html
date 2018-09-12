@@ -193,7 +193,7 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
       if (handled)
         ev.preventDefault();
     }
-    function play() { hide('start'); reset();          playing = true;  }
+    function play() { hide('start'); reset();  theme.play(); playing = true;  }
     function lose() { show('start'); setVisualScore(); updateDB(); playing = false; }
     function setVisualScore(n)      { vscore = n || score; invalidateScore(); }
     function setScore(n)            { score = n; setVisualScore(n);  }
@@ -397,7 +397,8 @@ v+1E3){l=Math.round(u*1E3/(j-v));w=Math.min(w,l);x=Math.max(x,l);s(y.data,Math.m
     
     
     
-    
+    var theme = new Audio();
+    theme.src='https://ia800504.us.archive.org/33/items/TetrisThemeMusic/Tetris.mp3';
     
     
     
